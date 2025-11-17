@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Remover Post de Anime{% endblock %}
+
+{% block content %}
+  <h2>⚠️ Tem certeza?</h2>
+
+  <p>Você está prestes a remover o post <b>"{{ post.title }}"</b>. Essa ação não pode ser desfeita!</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, remover</button>
+    <a href="{% url 'post_detail' post.pk %}">Cancelar</a>
+  </form>
+{% endblock %}

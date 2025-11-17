@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Anime Blog{% endblock %}</title>
+</head>
+
+<body style="background:#fafafa; font-family: Arial;">
+  <header>
+    <h1 style="color:#d12a2a;">🔥 Anime Blog — Reviews, Curiosidades e Personagens</h1>
+
+    <nav>
+      <a href="{% url 'post_list' %}">🏮 Página Inicial</a> |
+      <a href="{% url 'post_create' %}">📝 Novo Post</a> |
+      <a href="/admin/">⚙️ Admin</a>
+    </nav>
+    <hr>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <hr>
+    <small>Anime Blog — Powered by Django</small>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Posts de Anime{% endblock %}
+
+{% block content %}
+  <h2>📜 Lista de Reviews e Artigos de Anime</h2>
+
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{% url 'post_detail' post.pk %}">🌸 {{ post.title }}</a>
+        — <small>{{ post.posted_at|date:"d/m/Y H:i" }}</small>
+
+        [<a href="{% url 'post_update' post.pk %}">editar</a>]
+        [<a href="{% url 'post_delete' post.pk %}">remover</a>]
+      </li>
+    {% empty %}
+      <p>Nenhum post sobre anime ainda. Que tal criar um? 🎎</p>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Criar ou editar post de anime{% endblock %}
+
+{% block content %}
+  <h2>{% if post %}✏️ Editar Post{% else %}📝 Novo Post de Anime{% endif %}</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {% if form %}
+      {{ form.as_p }}
+    {% else %}
+      <!-- versão sem forms -->
+      <p>Título: <input type="text" name="title" value="{{ post.title|default:'' }}"></p>
+      <p>Conteúdo HTML:</p>
+      <textarea name="content" rows="10" cols="70">{{ post.content|default:'' }}</textarea>
+    {% endif %}
+    
+    <button type="submit">Salvar</button>
+  </form>
+
+  <p><a href="{% url 'post_list' %}">⬅️ Voltar</a></p>
+{% endblock %}
