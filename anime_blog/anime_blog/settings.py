@@ -32,16 +32,6 @@ ALLOWED_HOSTS = [
     os.environ.get('RENDER_EXTERNAL_HOSTNAME'),
 ]
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-if 'RENDER' in os.environ:
-    DEBUG = False
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600)
-    }
-    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-    
 # Application definition
 
 INSTALLED_APPS = [
@@ -138,3 +128,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'post_list'
 LOGOUT_REDIRECT_URL = 'post_list'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+if 'RENDER' in os.environ:
+    DEBUG = False
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600)
+    }
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
