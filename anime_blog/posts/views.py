@@ -76,7 +76,7 @@ def add_comment(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
-            comment.author = request.user
+            comment.author = request.user               # Só usuário logado pode comentar
             comment.save()
             return redirect("post_detail", pk=post.pk)
     else:

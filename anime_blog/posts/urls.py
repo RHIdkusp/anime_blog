@@ -17,4 +17,5 @@ urlpatterns = [
 
     # Comentário
     path('post/<int:pk>/comment/', add_comment, name='add_comment'),
+
 ]
