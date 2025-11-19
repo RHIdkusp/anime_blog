@@ -2,12 +2,26 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
+# Passo 3
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
 # Passo 1
 
 class Post(models.Model):
     title = models.CharField("Título do Anime ou Episódio", max_length=255)
     content = models.TextField("Conteúdo em HTML (Análise, Review ou Curiosidades)")
     posted_at = models.DateTimeField("Data da postagem", auto_now_add=True)
+
+    categories = models.ManyToManyField(Category, related_name="posts", blank=True)
 
     class Meta:
         ordering = ['-posted_at']
@@ -30,27 +44,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comentário de {self.author} em {self.post}"
-    
-# Passo 3
-
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    description = models.TextField(blank=True)
-
-    class Meta:
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
-
-
-class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    # NOVO — relação N:N com categorias
-    categories = models.ManyToManyField(Category, blank=True, related_name='posts')
-
-    def __str__(self):
-        return self.title

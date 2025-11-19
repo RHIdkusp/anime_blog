@@ -7,6 +7,15 @@
     <h2>🎬 {{ post.title }}</h2>
     <p><small>Postado em {{ post.posted_at|date:"d/m/Y H:i" }}</small></p>
 
+    <p><strong>Categorias:</strong>
+      {% for category in post.categories.all %}
+        <a href="{% url 'category_detail' category.pk %}">{{ category.name }}</a>
+        {% if not forloop.last %}, {% endif %}
+      {% empty %}
+        Nenhuma categoria.
+      {% endfor %}
+    </p>
+
     <div>
       {{ post.content|safe }}
     </div>
@@ -18,7 +27,7 @@
     </p>
   </article>
 
-<h3>Comentários</h3>
+<h3>💬 Comentários</h3>
 
 {% for comment in comments %}
     <div class="post">

@@ -3,12 +3,12 @@
 
 {% block content %}
   {% if category %}
-    <h2>🏷️ Posts na categoria: <strong>{{ category.name }}</strong></h2>
+    <h4>🏷️ Posts na categoria: <strong>{{ category.name }}</strong></h4>
     <p>{{ category.description }}</p>
   {% else %}
-    <h2>📜 Todos os Posts</h2>
+    <h4>📜 Todos os Posts</h4>
   {% endif %}
-  
+
   <h2>📜 Lista de Reviews e Artigos de Anime</h2>
 
   <ul>
@@ -16,7 +16,6 @@
       <li>
         <a href="{% url 'post_detail' post.pk %}">🌸 {{ post.title }}</a>
         — <small>{{ post.posted_at|date:"d/m/Y H:i" }}</small>
-
         [<a href="{% url 'post_update' post.pk %}">editar</a>]
         [<a href="{% url 'post_delete' post.pk %}">remover</a>]
       </li>

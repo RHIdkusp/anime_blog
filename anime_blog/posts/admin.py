@@ -7,8 +7,8 @@ from .models import Post, Comment, Category
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'posted_at')
     search_fields = ('title', 'content')
+    filter_horizontal = ('categories',)
     
 admin.site.register(Comment)
 
-admin.site.register(Post)
 admin.site.register(Category)
