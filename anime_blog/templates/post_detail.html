@@ -2,6 +2,7 @@
 {% block title %}{{ post.title }} - Anime Blog{% endblock %}
 
 {% block content %}
+
   <article>
     <h2>🎬 {{ post.title }}</h2>
     <p><small>Postado em {{ post.posted_at|date:"d/m/Y H:i" }}</small></p>
@@ -16,4 +17,20 @@
       <a href="{% url 'post_list' %}">⬅️ Voltar</a>
     </p>
   </article>
+
+<h3>Comentários</h3>
+
+{% for comment in comments %}
+    <div class="post">
+        <p><strong>{{ comment.author }}:</strong></p>
+        <p>{{ comment.text }}</p>
+        <p class="data">{{ comment.date_posted|date:"d/m/Y H:i" }}</p>
+    </div>
+{% empty %}
+    <p>Não há comentários ainda.</p>
+{% endfor %}
+
+<br>
+<a class="btn" href="{% url 'add_comment' post.pk %}">Adicionar comentário</a>
+
 {% endblock %}
