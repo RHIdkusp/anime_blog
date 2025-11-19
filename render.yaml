@@ -5,4 +5,4 @@ services:
     plan: free
     buildCommand: "pip install -r requirements.txt"
     startCommand: |
-      bash -c "python manage.py migrate --noinput && gunicorn anime_blog.wsgi"
+      bash -c "python manage.py render_migrate && gunicorn anime_blog.wsgi"
