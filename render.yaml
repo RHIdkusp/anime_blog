@@ -4,5 +4,5 @@ services:
     env: python
     plan: free
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn anime_blog.wsgi"
-    postDeployCommand: "python manage.py migrate"
+    startCommand: |
+      bash -c "python manage.py migrate --noinput && gunicorn anime_blog.wsgi"
