@@ -2,6 +2,13 @@
 {% block title %}Posts de Anime{% endblock %}
 
 {% block content %}
+  {% if category %}
+    <h2>🏷️ Posts na categoria: <strong>{{ category.name }}</strong></h2>
+    <p>{{ category.description }}</p>
+  {% else %}
+    <h2>📜 Todos os Posts</h2>
+  {% endif %}
+  
   <h2>📜 Lista de Reviews e Artigos de Anime</h2>
 
   <ul>
