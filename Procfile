@@ -1,0 +1,1 @@
+web: gunicorn anime_blog.anime_blog.wsgi
