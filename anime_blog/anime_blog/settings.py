@@ -22,15 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('django-insecure-im%q^7jfck5edfr$(mc!2v@n)ujbp0^s(930j+pos5mwz+rn0l')
+SECRET_KEY = 'django-insecure-im%q^7jfck5edfr$(mc!2v@n)ujbp0^s(930j+pos5mwz+rn0l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    os.environ.get('.onrender.com'),
-]
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com"]
 
@@ -131,12 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'post_list'
 LOGOUT_REDIRECT_URL = 'post_list'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-if 'RENDER' in os.environ:
-    DEBUG = False
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600)
-    }
-    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
