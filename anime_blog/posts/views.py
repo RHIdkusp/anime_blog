@@ -65,7 +65,7 @@ class PostDeleteView(DeleteView):
 
 
 # ========================================
-# ADICIONAR COMENTÁRIOS (PASSO 5)
+# ADICIONAR COMENTÁRIOS
 # ========================================
 @login_required
 def add_comment(request, pk):
