@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
-# Create your models here.
+# Passo 1
 
 class Post(models.Model):
     title = models.CharField("Título do Anime ou Episódio", max_length=255)
@@ -20,6 +20,8 @@ class Post(models.Model):
     
 User = get_user_model()
 
+# Passo 2
+
 class Comment(models.Model):
     post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -28,3 +30,27 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comentário de {self.author} em {self.post}"
+    
+# Passo 3
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # NOVO — relação N:N com categorias
+    categories = models.ManyToManyField(Category, blank=True, related_name='posts')
+
+    def __str__(self):
+        return self.title

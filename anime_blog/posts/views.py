@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import CommentForm
 
 
@@ -83,3 +83,19 @@ def add_comment(request, pk):
         form = CommentForm()
 
     return render(request, "post_add_comment.html", {"form": form, "post": post})
+
+# ========================================
+# ADICIONAR CATEGORIAS
+# ========================================
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, "category_list.html", {"categories": categories})
+
+
+def category_detail(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    posts = category.posts.all()
+    return render(request, "post_list.html", {
+        "posts": posts,
+        "category": category,
+    })
